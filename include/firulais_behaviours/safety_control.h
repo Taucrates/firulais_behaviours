@@ -74,6 +74,7 @@ class SafetyControl {
   // Params
   double max_linear_speed;
   double max_yaw_speed;
+  bool collision_avoidance;
 
   // Global variables
   geometry_msgs::Twist in_command_vel;

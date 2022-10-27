@@ -36,10 +36,13 @@ void SafetyControl::configure(){
   
 
   nh_.param("max_linear_speed", max_linear_speed, 0.6);
-  ROS_INFO("Max_linear_speed: %2.2f", max_linear_speed);
+  //ROS_INFO("Max_linear_speed: %2.2f", max_linear_speed);
 
   nh_.param("max_yaw_speed", max_yaw_speed, 1.0);
-  ROS_INFO("Max_yaw_speed: %2.2f", max_yaw_speed);
+  //ROS_INFO("Max_yaw_speed: %2.2f", max_yaw_speed);
+
+  nh_.param("collision_avoidance", collision_avoidance, false);
+  ROS_INFO("Collision avoidance: %s", collision_avoidance ? "true" : "false");
 
   // Publishers
   twist_pub_ = nh_.advertise<geometry_msgs::Twist>("twist_out", 1);
@@ -66,7 +69,7 @@ void SafetyControl::timerClb(const ros::TimerEvent& event){
 
   geometry_msgs::Twist filtered_command_vel;
 
-  if(!stop_autonomous){
+  if(!stop_autonomous && collision_avoidance){
 
     filtered_command_vel = in_command_vel;
 
