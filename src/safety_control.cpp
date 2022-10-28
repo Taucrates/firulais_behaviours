@@ -46,7 +46,7 @@ void SafetyControl::configure(){
 
   // Publishers
   twist_pub_ = nh_.advertise<geometry_msgs::Twist>("twist_out", 1);
-  cancel_nav_ = nh_.advertise<actionlib_msgs::GoalID>("move_base/cancel", 1);
+  cancel_nav_ = nh_.advertise<actionlib_msgs::GoalID>("/move_base/cancel", 1);
 
   // Subscribers
   twist_sub_ = nh_.subscribe("twist_in", 1, &SafetyControl::inTwistClb, this);
