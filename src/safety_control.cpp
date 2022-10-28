@@ -69,7 +69,7 @@ void SafetyControl::timerClb(const ros::TimerEvent& event){
 
   geometry_msgs::Twist filtered_command_vel;
 
-  if(!stop_autonomous && collision_avoidance){
+  if(!stop_autonomous){
 
     filtered_command_vel = in_command_vel;
 
@@ -103,18 +103,19 @@ void SafetyControl::timerClb(const ros::TimerEvent& event){
       
     }
 
-    /*if(ranges[0] < 0.25){
-      filtered_command_vel.linear.y -= abs(in_command_vel.linear.y);
+    if(collision_avoidance){
+      if(ranges[0] < 0.25){
+        filtered_command_vel.linear.y -= abs(in_command_vel.linear.y);
+      }
+
+      if(ranges[1] < 0.25){
+        filtered_command_vel.linear.x -= abs(in_command_vel.linear.x);
+      }
+
+      if(ranges[2] < 0.25){
+        filtered_command_vel.linear.y += abs(in_command_vel.linear.y);
+      }
     }
-
-    if(ranges[1] < 0.25){
-      filtered_command_vel.linear.x -= abs(in_command_vel.linear.x);
-    }
-
-    if(ranges[2] < 0.25){
-      filtered_command_vel.linear.y += abs(in_command_vel.linear.y);
-    }*/
-
     twist_pub_.publish(filtered_command_vel);
 
   } else if(!autonomous_stopped){
