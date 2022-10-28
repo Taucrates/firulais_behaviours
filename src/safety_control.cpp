@@ -103,7 +103,7 @@ void SafetyControl::timerClb(const ros::TimerEvent& event){
       
     }
 
-    if(ranges[0] < 0.25){
+    /*if(ranges[0] < 0.25){
       filtered_command_vel.linear.y -= abs(in_command_vel.linear.y);
     }
 
@@ -113,7 +113,7 @@ void SafetyControl::timerClb(const ros::TimerEvent& event){
 
     if(ranges[2] < 0.25){
       filtered_command_vel.linear.y += abs(in_command_vel.linear.y);
-    }
+    }*/
 
     twist_pub_.publish(filtered_command_vel);
 
