@@ -35,7 +35,7 @@ SafetyControl::~SafetyControl(){
 void SafetyControl::configure(){
   
 
-  nh_.param("max_linear_speed", max_linear_speed, 0.6);
+  nh_.param("max_linear_speed", max_linear_speed, 0.4);
   //ROS_INFO("Max_linear_speed: %2.2f", max_linear_speed);
 
   nh_.param("max_yaw_speed", max_yaw_speed, 1.0);
